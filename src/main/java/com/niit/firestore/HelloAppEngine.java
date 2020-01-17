@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
 
@@ -28,9 +29,9 @@ public class HelloAppEngine extends HttpServlet
   {
 	  datastore = DatastoreOptions.getDefaultInstance().getService();
 	  keyFactory = datastore.newKeyFactory().setKind("users");
-	  
-	  Key key = keyFactory.newKey("123");
-	  Entity entity = Entity.newBuilder(key)
+	
+	  Key taskKey = datastore.add(FullEntity.newBuilder(keyFactory.newKey()).build()).getKey();
+	  Entity entity = Entity.newBuilder(taskKey)
 	      .set("username", request.getParameter("username"))
 	      .set("email", request.getParameter("email"))
 	      .set("password", request.getParameter("password"))

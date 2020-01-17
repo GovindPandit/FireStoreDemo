@@ -1,10 +1,21 @@
 package com.niit.firestore;
 
-public class User 
+import java.io.Serializable;
+
+public class User implements Serializable
 {
+	private String userkey;
 	private String username;
 	private String email;
 	private String password;
+	
+	
+	public String getUserkey() {
+		return userkey;
+	}
+	public void setUserkey(String userkey) {
+		this.userkey = userkey;
+	}
 	public String getUsername() {
 		return username;
 	}
